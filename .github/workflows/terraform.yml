@@ -13,20 +13,15 @@ jobs:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_DEVOPS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_DEVOPS_SECRET_ACCESS_KEY }}
       AWS_ENDPOINT_URL: http://localhost:4566
+      LOCALSTACK_ACKNOWLEDGE_ACCOUNT_REQUIREMENT: "1"
 
     runs-on: ubuntu-latest
     environment: production
 
     steps:
     # Checkout the repository to the GitHub Actions runner
-    - name: Checkout
-      uses: actions/checkout@v4
-
     - name: Start LocalStack
-      run: |
-        pip install localstack
-        localstack start -d
-        localstack wait -t 30
+      uses: localstack/action@v0.1.7
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3
