@@ -14,7 +14,6 @@ jobs:
       AWS_SECRET_ACCESS_KEY: mock_secret
       AWS_DEFAULT_REGION: us-east-1
       AWS_ENDPOINT_URL: http://localhost:4566
-      LOCALSTACK_ACKNOWLEDGE_ACCOUNT_REQUIREMENT: "1"
 
     runs-on: ubuntu-latest
     environment: production
@@ -23,12 +22,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
+    # The verified marketplace action that handles docker initialization cleanly
     - name: Start LocalStack
-      run: |
-        pip install localstack
-        localstack start -d
-        localstack wait -t 30
-
+      uses: localst
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3
       with:
