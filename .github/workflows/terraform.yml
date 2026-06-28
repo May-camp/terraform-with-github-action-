@@ -44,30 +44,12 @@ jobs:
       uses: hashicorp/setup-terraform@v3
       with:
         terraform_version: "1.5.7"
-        
-    - name: Terraform init
-      uses: hashicorp/terraform-github-actions@master
-      with:
-        tf_action_version: 1.5.7
-        tf_action_subcommand: 'init'
-        tf_action_working_dir: '.'
-        tf_action_comment: true
 
-    - name: Terraform plan
-      uses: hashicorp/terraform-github-actions@master
-      with:
-        tf_action_version: 1.5.7
-        tf_action_subcommand: 'plan'
-        tf_action_working_dir: '.'
-        tf_action_comment: true
+    - name: Terraform Init
+      run: terraform init 
 
-    - name: Terraform apply
-      uses: hashicorp/terraform-github-actions@master
-      with:
-        tf_action_version: 1.5.7
-        tf_action_subcommand: 'apply'
-        tf_action_working_dir: '.'
-        tf_action_comment: true
-        
-    
+    - name: Terraform Plan
+      run: terraform plan
 
+    - name: Terraform Apply
+      run: terraform apply --auto-approve
