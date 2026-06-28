@@ -24,7 +24,10 @@ jobs:
 
     # The verified marketplace action that handles docker initialization cleanly
     - name: Start LocalStack
-      uses: localst
+      uses: localstack/setup-localstack@v0.2.2
+      with:
+        image-tag: 'latest'
+        
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3
       with:
