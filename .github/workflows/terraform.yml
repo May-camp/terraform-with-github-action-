@@ -10,8 +10,9 @@ jobs:
     name: 'Terraform'
     env:
       # AWS secrets
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_DEVOPS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_DEVOPS_SECRET_ACCESS_KEY }}
+      AWS_ACCESS_KEY_ID: mock_key
+      AWS_SECRET_ACCESS_KEY: mock_secret
+      AWS_DEFAULT_REGION: us-east-1
       AWS_ENDPOINT_URL: http://localhost:4566
       LOCALSTACK_ACKNOWLEDGE_ACCOUNT_REQUIREMENT: "1"
 
