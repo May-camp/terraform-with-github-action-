@@ -45,8 +45,11 @@ jobs:
       with:
         terraform_version: "1.5.7"
 
+    - name: Create Backend S3 Bucket
+      run: awslocal s3api create-bucket --bucket my-local-test-bucket --region us-east-1
+
     - name: Terraform Init
-      run: terraform init 
+      run: terraform init -backend-config="s3_use_path_style=true"
 
     - name: Terraform Plan
       run: terraform plan
