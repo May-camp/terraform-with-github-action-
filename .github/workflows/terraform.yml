@@ -20,9 +20,14 @@ jobs:
     environment: production
 
     steps:
-    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v4
+
     - name: Start LocalStack
-      uses: localstack/action@v0.3.2
+      run: |
+        pip install localstack
+        localstack start -d
+        localstack wait -t 30
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3
