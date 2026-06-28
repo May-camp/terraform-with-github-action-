@@ -22,7 +22,7 @@ jobs:
     steps:
     # Checkout the repository to the GitHub Actions runner
     - name: Start LocalStack
-      uses: localstack/action@v0.1.7
+      uses: localstack/action@v0.3.2
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3
