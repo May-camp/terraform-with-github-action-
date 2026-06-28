@@ -43,13 +43,23 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3
       with:
-        terraform_version: "1.5.7"
+        terraform_version: "1.6.6"
 
+    # 2. Automate S3 Bucket Creation
     - name: Create Backend S3 Bucket
       run: awslocal s3api create-bucket --bucket my-local-b --region us-east-1
 
+    # 3. Initialize using valid 1.6.x backend configuration arguments
     - name: Terraform Init
-      run: terraform init 
+      run: |
+        terraform init \
+          -backend-config="endpoint=http://localhost:4566" \
+          -backend-config="sts_endpoint=http://localhost:4566" \
+          -backend-config="iam_endpoint=http://localhost:4566" \
+          -backend-config="skip_credentials_validation=true" \
+          -backend-config="skip_metadata_api_check=true" \
+          -backend-config="skip_requesting_account_id=true" \
+          -backend-config="use_path_style=true"
 
     - name: Terraform Plan
       run: terraform plan
